@@ -1,0 +1,116 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1782423922,
+        "narHash": "sha256-qPNd6lUohHP5gcJhqQ7rLV87RwIx0xYR2A4Frb9Zjc4=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "5d320ab301cfaaca7d32514f13815d19d109f5f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "knappy": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781897130,
+        "narHash": "sha256-qOPWqownJE+rL08pfILXNo7cYok6uXA0/AjVi10NUOs=",
+        "path": "/home/andrew/Documents/Projects/knappy",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/andrew/Documents/Projects/knappy",
+        "type": "path"
+      }
+    },
+    "loci-core": {
+      "inputs": {
+        "knappy": "knappy",
+        "nixpkgs": [
+          "loci-nvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1782434398,
+        "narHash": "sha256-OtHZAhnNUDxpVgf/b9aZGuui4ejOM6zP2eWOxXO4tqc=",
+        "path": "/home/andrew/Documents/Projects/loci-core",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/andrew/Documents/Projects/loci-core",
+        "type": "path"
+      }
+    },
+    "loci-nvim": {
+      "inputs": {
+        "loci-core": "loci-core",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1782510614,
+        "narHash": "sha256-pNEDTJ7nq9e4BVttokEANYWykrachWZAQy9Ppg3ENbI=",
+        "path": "/home/andrew/Documents/Projects/loci.nvim",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/andrew/Documents/Projects/loci.nvim",
+        "type": "path"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1782467914,
+        "narHash": "sha256-pGvFkM8N0xEkIIXDe5YYfbEAvHrk4IxBrjB/x8OomhE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e73de5be04e0eff4190a1432b946d469c794e7b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-neovim": {
+      "locked": {
+        "lastModified": 1778869304,
+        "narHash": "sha256-30sZNZoA1cqF5JNO9fVX+wgiQYjB7HJqqJ4ztCDeBZE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d233902339c02a9c334e7e593de68855ad26c4cb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "d2339023",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "loci-nvim": "loci-nvim",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-neovim": "nixpkgs-neovim"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
