@@ -42,14 +42,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1782434398,
-        "narHash": "sha256-OtHZAhnNUDxpVgf/b9aZGuui4ejOM6zP2eWOxXO4tqc=",
-        "path": "/home/andrew/Documents/Projects/loci-core",
-        "type": "path"
+        "lastModified": 1783651035,
+        "narHash": "sha256-r0ZrP01k2of7bVfKzrBdhCP2tC/jrpnUfVvVVCbB84Q=",
+        "owner": "Bullish-Design",
+        "repo": "loci-core",
+        "rev": "02be76df0997d60a21011b4b92836c1f19d38b97",
+        "type": "github"
       },
       "original": {
-        "path": "/home/andrew/Documents/Projects/loci-core",
-        "type": "path"
+        "owner": "Bullish-Design",
+        "ref": "02be76d",
+        "repo": "loci-core",
+        "type": "github"
       }
     },
     "loci-nvim": {
@@ -60,8 +64,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1782510614,
-        "narHash": "sha256-pNEDTJ7nq9e4BVttokEANYWykrachWZAQy9Ppg3ENbI=",
+        "lastModified": 1783717228,
+        "narHash": "sha256-05GY8QzD3nB8c24Q5c6hV5ojFUYAVTVNUBPzNzHZ0bk=",
         "path": "/home/andrew/Documents/Projects/loci.nvim",
         "type": "path"
       },
