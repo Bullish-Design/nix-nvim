@@ -16,10 +16,10 @@
     };
 
     # ── the loci editor stack (CONSUMED — nix-nvim-PLAN §6) ──────────────
-    # plugin → rtp, loci-lsp → PATH. Absolute path: in dev (relative path:
-    # fails pure eval); github:…?ref=<tag> at publish via repoman fleet.
+    # plugin → rtp, loci-lsp → PATH. Published pin (pure eval; loci.nvim@v0.1.1
+    # carries the activation fix and pins loci-core@02be76d / pygls 2.1.1).
     loci-nvim = {
-      url = "path:/home/andrew/Documents/Projects/loci.nvim";
+      url = "github:Bullish-Design/loci.nvim?ref=v0.1.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -65,13 +65,17 @@
       },
       "locked": {
         "lastModified": 1783717228,
-        "narHash": "sha256-05GY8QzD3nB8c24Q5c6hV5ojFUYAVTVNUBPzNzHZ0bk=",
-        "path": "/home/andrew/Documents/Projects/loci.nvim",
-        "type": "path"
+        "narHash": "sha256-Om5HZD6HxUNEsKrUMryOPRClBQR7VB5+aH+V/tGagmY=",
+        "owner": "Bullish-Design",
+        "repo": "loci.nvim",
+        "rev": "262bbc23bf3a9c664785f554a860bfb65f5f953c",
+        "type": "github"
       },
       "original": {
-        "path": "/home/andrew/Documents/Projects/loci.nvim",
-        "type": "path"
+        "owner": "Bullish-Design",
+        "ref": "v0.1.1",
+        "repo": "loci.nvim",
+        "type": "github"
       }
     },
     "nixpkgs": {
