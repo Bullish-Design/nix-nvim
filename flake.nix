@@ -16,10 +16,11 @@
     };
 
     # ── the loci editor stack (CONSUMED — nix-nvim-PLAN §6) ──────────────
-    # plugin → rtp, loci-lsp → PATH. Published pin (pure eval; loci.nvim@v0.1.1
-    # carries the activation fix and pins loci-core@02be76d / pygls 2.1.1).
+    # plugin → rtp, loci-lsp → PATH. Published pin (pure eval; loci.nvim@v0.1.2
+    # fetches loci-core + its knappy dep over git+ssh so the loci stack resolves
+    # on headless boxes — v0.1.1's github: pin 404'd on the private loci-core).
     loci-nvim = {
-      url = "github:Bullish-Design/loci.nvim?ref=v0.1.1";
+      url = "github:Bullish-Design/loci.nvim?ref=v0.1.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
