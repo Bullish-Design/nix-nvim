@@ -21,6 +21,8 @@ __pycache__/
 result
 result-*
 
-# colocated jj + local scratch
+# colocated jj + local scratch — but keep the shareable .scratch/projects/ docs
+# tracked (fleet convention: repoman et al. version project docs there).
 .jj/
-.scratch/
+.scratch/*
+!.scratch/projects/
