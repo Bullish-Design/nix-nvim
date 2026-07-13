@@ -4,7 +4,7 @@
 { inputs }:
 { config, lib, pkgs, ... }:
 let
-  inherit (lib) mkIf optional optionalString concatStringsSep makeBinPath;
+  inherit (lib) mkIf optional optionalString concatStringsSep makeBinPath escapeShellArg;
   cfg = config.nix-nvim.neovim;
 
   # The loci editor stack from the loci.nvim flake (nix-nvim-PLAN §3.3/§6):
@@ -58,6 +58,7 @@ let
     # sqlite carried from the source wrapper (defensive; audit candidate — §10 Q4).
     export LD_LIBRARY_PATH="${pkgs.sqlite.out}/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
     export PATH="${makeBinPath pathPkgs}''${PATH:+:$PATH}"
+    export LOCI_OBSIDIAN_VAULT=${escapeShellArg cfg.obsidian.vaultPath}
     exec ${cfg.package}/bin/nvim -u "${srcDir}/init.lua" ${cmdFlags} ${postFlags} "$@"
   '';
 in

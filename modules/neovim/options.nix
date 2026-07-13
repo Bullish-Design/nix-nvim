@@ -2,7 +2,7 @@
 # Namespace is the stack-wide repo-root convention `nix-nvim.neovim.*`
 # (AMENDS the scaffold's `programs.nix-nvim.*`).
 { inputs }:
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkOption types;
   # The neovim 0.12 pin (d2339023 → 0.12.2), imported for the `package` default.
@@ -58,6 +58,13 @@ in
         at build time. Off → rely on runtime grammar compilation (loses
         reproducibility; not recommended).
       '';
+    };
+
+    obsidian.vaultPath = mkOption {
+      type = types.str;
+      default = "${config.home.homeDirectory}/Notes";
+      defaultText = lib.literalExpression "\${config.home.homeDirectory}/Notes";
+      description = "Absolute path to the Obsidian vault used by the bundled Obsidian integration.";
     };
 
     extraLuaConfig = mkOption {

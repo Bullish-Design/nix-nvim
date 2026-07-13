@@ -4,7 +4,7 @@ local notes = require("productivity.notes")
 -- only accepts existing workspace directories, so bootstrap the default vault on
 -- first launch rather than preventing Neovim from starting on a fresh host.
 local vault_path_env = vim.uv.os_getenv("LOCI_OBSIDIAN_VAULT")
-local vault_path_config = vim.fn.expand(vault_path_env or "~/Documents/Notes")
+local vault_path_config = vim.fn.expand(vault_path_env or "~/Notes")
 
 if vim.fn.isdirectory(vault_path_config) == 0 then
   vim.fn.mkdir(vault_path_config, "p")
