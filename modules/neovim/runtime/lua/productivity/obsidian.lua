@@ -1,8 +1,14 @@
 local notes = require("productivity.notes")
 
--- Allow obsidian vault path to be configured via environment variable (for testing)
+-- Allow the vault path to be configured via environment variable. Obsidian.nvim
+-- only accepts existing workspace directories, so bootstrap the default vault on
+-- first launch rather than preventing Neovim from starting on a fresh host.
 local vault_path_env = vim.uv.os_getenv("LOCI_OBSIDIAN_VAULT")
-local vault_path_config = vault_path_env or "~/Documents/Notes"
+local vault_path_config = vim.fn.expand(vault_path_env or "~/Documents/Notes")
+
+if vim.fn.isdirectory(vault_path_config) == 0 then
+  vim.fn.mkdir(vault_path_config, "p")
+end
 
 require("obsidian").setup({
   workspaces = {
