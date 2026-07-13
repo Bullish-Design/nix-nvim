@@ -24,11 +24,11 @@ wk.add({
   { "<leader>ft",      "<cmd>TodoQuickFix keywords=TODO,FIX,FIXME,NOTE,PERF,HACK,WARN,TEST<cr>", desc = "Todos" },
 
   -- ── FFF (fast fuzzy find) ──────────────────────────────────────────
-  { "<leader>F",       group = "FFF" },
-  { "<leader>Ff",      function() require("fff").find_files() end,     desc = "Files" },
-  { "<leader>Fg",      function() require("fff").live_grep() end,      desc = "Grep" },
-  { "<leader>Fz",      function() require("fff").live_grep({ grep = { modes = { "fuzzy", "plain" } } }) end, desc = "Fuzzy grep" },
-  { "<leader>Fc",      function() require("fff").live_grep({ query = vim.fn.expand("<cword>") }) end, desc = "Current word" },
+  -- { "<leader>F",       group = "FFF" },
+  -- { "<leader>Ff",      function() require("fff").find_files() end,     desc = "Files" },
+  -- { "<leader>Fg",      function() require("fff").live_grep() end,      desc = "Grep" },
+  -- { "<leader>Fz",      function() require("fff").live_grep({ grep = { modes = { "fuzzy", "plain" } } }) end, desc = "Fuzzy grep" },
+  -- { "<leader>Fc",      function() require("fff").live_grep({ query = vim.fn.expand("<cword>") }) end, desc = "Current word" },
 
   -- ── Git ──────────────────────────────────────────────────────────────
   { "<leader>g",  group = "Git" },

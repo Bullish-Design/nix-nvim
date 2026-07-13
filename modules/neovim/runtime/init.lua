@@ -38,7 +38,7 @@ vim.pack.add({
   { src = "https://github.com/edmundmiller/bases.nvim",                     version = "146c92bd8c1bb3c23b3ba01fca8f635b2cde2d82" },
   { src = "https://github.com/Bullish-Design/tasknotes.nvim",               version = "v0.2.0" },
   { src = "https://github.com/MunifTanjim/nui.nvim",                        version = "0.4.0" },
-  { src = "https://github.com/dmtrKovalenko/fff",                           version = "0.8.2-nightly.cf3dcf6" },
+  -- { src = "https://github.com/dmtrKovalenko/fff",                        version = "0.8.2-nightly.cf3dcf6" },
   { src = "https://github.com/nvim-neotest/neotest",                        version = "v5.18.0" },
   { src = "https://github.com/L3MON4D3/LuaSnip",                            version = "v2.5.0" },
   { src = "https://github.com/piersolenski/wtf.nvim",                       version = "ef7c22daf5c99f4c96fc2d0719d6f1848802fc02" },
@@ -131,7 +131,7 @@ require("sidequest").setup({
 require("development.wayfinder")
 require("development.haunt")
 require("development.zeal")
-require("development.fff")
+-- require("development.fff")
 require("development.neotest")
 
 -- Productivity
