@@ -25,7 +25,8 @@ flake.nix  (inputs: nixpkgs · nixpkgs-neovim d2339023 · home-manager · loci-n
 Options live under **`nix-nvim.neovim.*`** (repo-root convention, AMENDS the old
 `programs.nix-nvim.*`): `enable`, `command` (consumer sets `nv`), `package`
 (defaults to the neovim 0.12.2 pin), `extraPackages`, `loci.enable`,
-`treesitter.enable`, `extraLuaConfig`. options.nix declares, config.nix
+`treesitter.enable`, `clipboard` (osc52 | auto), `extraLuaConfig`. options.nix
+declares, config.nix
 implements behind `mkIf cfg.enable`.
 
 The `config` body builds a `writeShellScriptBin` wrapper that launches the

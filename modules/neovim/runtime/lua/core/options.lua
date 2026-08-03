@@ -30,10 +30,19 @@ opt.showtabline = 2
 opt.splitbelow = true
 opt.splitright = true
 
--- Defer clipboard setup to avoid wl-paste crash on empty clipboard at startup
-vim.schedule(function()
-  opt.clipboard = "unnamedplus"
-end)
+-- Clipboard provider strategy, chosen by the nix wrapper (nix-nvim.neovim.clipboard):
+--   osc52 → force the built-in OSC52 provider (default). No provider binary needed
+--           on the server; copy/paste travels as an escape sequence over SSH and the
+--           client terminal (kitty, alacritty, wezterm, iTerm2, Windows Terminal, …)
+--           owns the real clipboard. Forcing it also skips provider auto-detection,
+--           so no "No provider available" warning on headless boxes.
+--   auto  → leave Neovim's provider auto-detection on (xclip/xsel/wl-copy/pbcopy…).
+--           Right choice on graphical systems with a local display.
+local clipboard_mode = vim.g.nix_nvim_clipboard or "osc52"
+if clipboard_mode == "osc52" then
+  vim.g.clipboard = "osc52"
+end
+opt.clipboard = "unnamedplus"
 
 opt.foldlevel = 99
 opt.foldlevelstart = 99

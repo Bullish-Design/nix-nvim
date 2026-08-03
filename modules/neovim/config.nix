@@ -48,6 +48,7 @@ let
     [
       ''--cmd "set rtp^=${srcDir}"''
       ''--cmd "set rtp+=${srcDir}/after"''
+      ''--cmd "let g:nix_nvim_clipboard = '${cfg.clipboard}'"''
     ]
     ++ optional cfg.treesitter.enable ''--cmd "set rtp^=${grammarPath}"''
     ++ optional cfg.loci.enable ''--cmd "set rtp+=${lociPlugin}"''

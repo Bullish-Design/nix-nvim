@@ -60,6 +60,24 @@ in
       '';
     };
 
+    clipboard = mkOption {
+      type = types.enum [ "auto" "osc52" ];
+      default = "osc52";
+      description = ''
+        Clipboard provider strategy:
+
+        - `osc52` (default): force the built-in OSC 52 provider. No provider
+          binary is needed on the server — copy/paste travels as an escape
+          sequence over SSH and the client terminal (kitty, alacritty, wezterm,
+          iTerm2, Windows Terminal, …) owns the real clipboard. Forcing it also
+          skips provider auto-detection, so no "No provider available" warning
+          on headless boxes.
+        - `auto`: leave Neovim's provider auto-detection on (xclip/xsel/
+          wl-copy/pbcopy…). The right choice on graphical systems with a local
+          display.
+      '';
+    };
+
     obsidian.vaultPath = mkOption {
       type = types.str;
       default = "${config.home.homeDirectory}/Notes";
