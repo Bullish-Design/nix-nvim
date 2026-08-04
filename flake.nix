@@ -20,7 +20,7 @@
     # fetches loci-core + its knappy dep over git+ssh so the loci stack resolves
     # on headless boxes — v0.1.1's github: pin 404'd on the private loci-core).
     loci-nvim = {
-      url = "github:Bullish-Design/loci.nvim?ref=v0.1.2";
+      url = "github:Bullish-Design/loci.nvim?ref=v0.1.3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
