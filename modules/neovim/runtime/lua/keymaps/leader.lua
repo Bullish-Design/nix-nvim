@@ -82,7 +82,19 @@ wk.add({
   { "<leader>q",  group = "Quit/Session" },
   { "<leader>qq", "<cmd>quitall<cr>",                          desc = "Quit all" },
   { "<leader>qs", function() require("resession").load() end,   desc = "Restore session" },
-  { "<leader>qS", function() require("resession").save() end,   desc = "Save session" },
+  -- On a loci tab (vim.t.loci_workspace_id set) save the workspace session
+  -- TAB-SCOPED: the generic resession.save() writes the GLOBAL flavor and would
+  -- overwrite the loci-<id>.json session as global-scoped (the client loads those
+  -- safely with reset=false + a warning, but the right save is tab-scoped — the
+  -- same save_tab the client's deactivate flow uses).
+  { "<leader>qS", function()
+      local wid = vim.t.loci_workspace_id
+      if wid then
+        require("resession").save_tab("loci-" .. wid)
+      else
+        require("resession").save()
+      end
+    end, desc = "Save session" },
   { "<leader>qd", function() require("resession").delete() end, desc = "Delete session" },
   { "<leader>qD", function() require("resession").detach() end, desc = "Detach session" },
   { "<leader>qw", function() require("workspace.sessions").load_workspace() end,   desc = "Restore workspace" },
