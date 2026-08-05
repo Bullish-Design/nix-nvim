@@ -17,11 +17,14 @@
 
     # ── the loci editor stack (CONSUMED — nix-nvim-PLAN §6) ──────────────
     # plugin → rtp, loci-lsp → PATH, loci CLI → profile. Published pin (pure
-    # eval; loci.nvim@v0.1.2 fetches loci-core + its knappy dep over git+ssh so
+    # eval; loci.nvim@v0.1.2 fetched loci-core + its knappy dep over git+ssh so
     # the loci stack resolves on headless boxes — v0.1.1's github: pin 404'd on
-    # the private loci-core). v0.1.4 adds the packages.loci re-export.
+    # the private loci-core). v0.1.4 added the packages.loci re-export; v0.2.0
+    # realigns the client with the V2 engine wire contract (loci/<wire>
+    # features, previews, pull diagnostics, saveResult; the engine's pygls
+    # host + `loci init` landed on loci-core main @4a8d5e2).
     loci-nvim = {
-      url = "github:Bullish-Design/loci.nvim?ref=v0.1.4";
+      url = "github:Bullish-Design/loci.nvim?ref=v0.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
