@@ -62,19 +62,21 @@ in
 
     clipboard = mkOption {
       type = types.enum [ "auto" "osc52" ];
-      default = "osc52";
+      default = "auto";
       description = ''
         Clipboard provider strategy:
 
-        - `osc52` (default): force the built-in OSC 52 provider. No provider
-          binary is needed on the server — copy/paste travels as an escape
-          sequence over SSH and the client terminal (kitty, alacritty, wezterm,
-          iTerm2, Windows Terminal, …) owns the real clipboard. Forcing it also
-          skips provider auto-detection, so no "No provider available" warning
-          on headless boxes.
-        - `auto`: leave Neovim's provider auto-detection on (xclip/xsel/
-          wl-copy/pbcopy…). The right choice on graphical systems with a local
-          display.
+        - `auto` (default): use the local graphical provider when one is
+          available in the current session (wl-clipboard on a Wayland desktop,
+          xclip/xsel on X11, pbcopy on macOS, …), otherwise fall back to the
+          built-in OSC 52 provider. This is the portable policy: a desktop
+          session gets direct clipboard access, while an SSH/TUI session into a
+          headless box has no local provider, so copy/paste travels as an escape
+          sequence to the client terminal (kitty, alacritty, wezterm, iTerm2,
+          Windows Terminal, …) — no "No provider available" warning.
+        - `osc52`: force the built-in OSC 52 provider and skip the
+          local-provider check. Use only if you must reach the client
+          terminal's clipboard from a host that does have a local provider.
       '';
     };
 

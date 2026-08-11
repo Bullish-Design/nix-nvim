@@ -31,15 +31,26 @@ opt.splitbelow = true
 opt.splitright = true
 
 -- Clipboard provider strategy, chosen by the nix wrapper (nix-nvim.neovim.clipboard):
---   osc52 → force the built-in OSC52 provider (default). No provider binary needed
---           on the server; copy/paste travels as an escape sequence over SSH and the
---           client terminal (kitty, alacritty, wezterm, iTerm2, Windows Terminal, …)
---           owns the real clipboard. Forcing it also skips provider auto-detection,
---           so no "No provider available" warning on headless boxes.
---   auto  → leave Neovim's provider auto-detection on (xclip/xsel/wl-copy/pbcopy…).
---           Right choice on graphical systems with a local display.
-local clipboard_mode = vim.g.nix_nvim_clipboard or "osc52"
-if clipboard_mode == "osc52" then
+--   auto  (default): use the local graphical provider when one is available in the
+--         current session (wl-clipboard on Wayland, xclip/xsel on X11, pbcopy on
+--         macOS, …); otherwise fall back to the built-in OSC 52 provider. This is
+--         the portable policy: a desktop session gets direct clipboard access,
+--         while an SSH/TUI session into a headless box has no local provider, so
+--         copy/paste travels as an escape sequence to the client terminal (kitty,
+--         alacritty, wezterm, iTerm2, Windows Terminal, …) instead of warning
+--         about a missing provider.
+--   osc52 → force the built-in OSC 52 provider and skip the local-provider check.
+local function has_local_clipboard_provider()
+  local wayland = vim.env.WAYLAND_DISPLAY ~= nil
+  local x11 = vim.env.DISPLAY ~= nil
+  return (wayland and vim.fn.executable("wl-copy") == 1 and vim.fn.executable("wl-paste") == 1)
+    or (x11 and (vim.fn.executable("xclip") == 1 or vim.fn.executable("xsel") == 1))
+    or vim.fn.executable("pbcopy") == 1 -- macOS: no display gate needed
+    or vim.fn.executable("clip.exe") == 1 -- WSL/Windows
+end
+
+local clipboard_mode = vim.g.nix_nvim_clipboard or "auto"
+if clipboard_mode == "osc52" or (clipboard_mode == "auto" and not has_local_clipboard_provider()) then
   vim.g.clipboard = "osc52"
 end
 opt.clipboard = "unnamedplus"
