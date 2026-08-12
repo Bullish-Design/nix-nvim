@@ -1,3 +1,10 @@
+# flake.nix — nix-nvim
+#
+# Rendered from template-nix. The SKELETON (the inputs scaffold + the outputs
+# structure) is template-owned and re-converges via `copyroom update`; the
+# `description`, the inter-library `inputs`, and the exported module attr list
+# are THIS repo's to fill. A library that depends on another library adds that
+# `path:` input itself — the template does not predict the DAG.
 {
   description = "Home Manager module flake packaging the loci-rich Neovim 0.12 config (promoted from .dotfiles/nvim); consumes loci.nvim, supersedes nixvim";
 
