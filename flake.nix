@@ -22,9 +22,13 @@
     # the private loci-core). v0.1.4 added the packages.loci re-export; v0.2.0
     # realigns the client with the V2 engine wire contract (loci/<wire>
     # features, previews, pull diagnostics, saveResult; the engine's pygls
-    # host + `loci init` landed on loci-core main @4a8d5e2).
+    # host + `loci init` landed on loci-core main @4a8d5e2). v0.2.1 carries
+    # loci-core @81d38ba, which aliases packages.loci-lsp onto the loci-core
+    # derivation instead of building the same source twice — that duplicate was
+    # what made buildEnv abort on the shared bin/.loci-wrapped and fail every
+    # rebuild — and completes the V2 plugin surface.
     loci-nvim = {
-      url = "github:Bullish-Design/loci.nvim?ref=v0.2.0";
+      url = "github:Bullish-Design/loci.nvim?ref=v0.2.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
