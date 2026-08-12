@@ -4,18 +4,26 @@
 { inputs }:
 { config, lib, pkgs, ... }:
 let
-  inherit (lib) mkIf optional optionals optionalString concatStringsSep makeBinPath escapeShellArg;
+  inherit (lib) mkIf optional optionalString concatStringsSep makeBinPath escapeShellArg;
   cfg = config.nix-nvim.neovim;
 
   # The loci editor stack from the loci.nvim flake (nix-nvim-PLAN §3.3/§6):
-  #   plugin → runtimepath ; loci-lsp binary → launcher PATH ; loci CLI → profile.
+  #   plugin → runtimepath ; loci engine (loci + loci-lsp) → launcher PATH + profile.
   lociPlugin = inputs.loci-nvim.packages.${pkgs.system}.loci-nvim;
-  lociLsp = inputs.loci-nvim.packages.${pkgs.system}.loci-lsp;
-  # The `loci` CLI: the vault BOOTSTRAP path (`loci repository.init` — the client
-  # cannot attach until a `.loci/` exists) and the out-of-editor arm. It ships in
-  # loci-core's derivation, which was previously reachable only as a transitive
-  # dependency inside the loci-lsp wrapper's own PATH — never in the user profile.
-  lociCli = inputs.loci-nvim.packages.${pkgs.system}.loci;
+
+  # loci.nvim re-exports loci-core's engine under two attribute names —
+  # `loci` (the CLI: the vault BOOTSTRAP path `loci repository.init`, since the
+  # client cannot attach until a `.loci/` exists, plus the out-of-editor arm)
+  # and `loci-lsp` (the LSP host the launcher needs on PATH). Upstream builds
+  # them from one wheel whose [project.scripts] ships BOTH consoles, so a single
+  # package provides `loci` and `loci-lsp` together.
+  #
+  # Take it once. Referencing both attrs installed the same engine twice, and
+  # buildEnv aborts on the shared `bin/.loci-wrapped`, failing the entire
+  # home-manager generation. loci-core now aliases the two names onto one
+  # derivation so that is structurally impossible; taking one attr is correct
+  # either way, including against an older lock where they were separate builds.
+  lociEngine = inputs.loci-nvim.packages.${pkgs.system}.loci;
 
   # The shipped lua tree (init.lua + lua/* minus lua/loci/ + after/ + neoconf.json)
   # as a store path. This is the central de-hardcode of srcDir.
@@ -45,7 +53,7 @@ let
   # Everything the launcher needs on PATH (so vim.fn.executable("loci-lsp") and
   # the ambient servers resolve regardless of the surrounding shell env).
   pathPkgs = lspServers ++ cfg.extraPackages
-    ++ optionals cfg.loci.enable [ lociLsp lociCli ];
+    ++ optional cfg.loci.enable lociEngine;
 
   extraLuaFile = pkgs.writeText "nix-nvim-extra.lua" cfg.extraLuaConfig;
 
@@ -72,6 +80,6 @@ in
 {
   config = mkIf cfg.enable {
     home.packages = [ wrapper ] ++ lspServers ++ cfg.extraPackages
-      ++ optionals cfg.loci.enable [ lociLsp lociCli ];
+      ++ optional cfg.loci.enable lociEngine;
   };
 }
