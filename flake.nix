@@ -34,8 +34,15 @@
     # derivation instead of building the same source twice — that duplicate was
     # what made buildEnv abort on the shared bin/.loci-wrapped and fail every
     # rebuild — and completes the V2 plugin surface.
+    #
+    # v0.3.0 carries loci-core @c34dc83 (v0.4.1), which fixes `:w` on a NEW note.
+    # Every save of a note created during the session was refused forever
+    # (`destination_exists`) and — worse than the warning — never indexed it, so
+    # the note stayed invisible to search and the graph. Minor, not patch: that is
+    # the first thing a user does with the editor. loci.nvim t34 measures the fix
+    # against the real server and fails against the previous engine build.
     loci-nvim = {
-      url = "github:Bullish-Design/loci.nvim?ref=v0.2.1";
+      url = "github:Bullish-Design/loci.nvim?ref=v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
