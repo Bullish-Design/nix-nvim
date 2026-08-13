@@ -2,6 +2,19 @@
 -- Applied via LspAttach autocmd.
 local wk = require("which-key")
 
+-- Neovim 0.11+ ships its own LSP keymaps (`grn` `gra` `grr` `gri` `grt` `grx`
+-- `gO`). Keeping them alongside the set below gave every action two keys, and
+-- made the buffer-local `gr` a prefix of six global maps — so `gr` stalled for
+-- 'timeoutlen' (300ms) on every press. Delete the defaults; the set below is
+-- the one interface. `grx` (codelens) is re-homed to <localleader>c.
+for _, def in ipairs({
+  { "n", "grn" }, { "n", "gra" }, { "x", "gra" },
+  { "n", "grr" }, { "n", "gri" }, { "n", "grt" },
+  { "n", "grx" }, { "n", "gO" },
+}) do
+  pcall(vim.keymap.del, def[1], def[2])
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true }),
   callback = function(event)
@@ -26,6 +39,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<localleader>a", function() require("tiny-code-action").code_action() end, { buffer = buf, desc = "Code action" })
     vim.keymap.set("n", "<localleader>f", function() vim.lsp.buf.format({ async = true }) end, { buffer = buf, desc = "Format buffer" })
     vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, { buffer = buf, desc = "Line diagnostics" })
+    vim.keymap.set("n", "<localleader>c", vim.lsp.codelens.run, { buffer = buf, desc = "Run codelens" })
     vim.keymap.set("n", "<localleader>O", "<cmd>Outline<cr>", { buffer = buf, desc = "Symbol outline" })
     vim.keymap.set("n", "<localleader>p", function() require("overlook.api").peek_definition() end, { buffer = buf, desc = "Peek definition" })
     vim.keymap.set("n", "<localleader>P", function() require("overlook.api").close_all() end, { buffer = buf, desc = "Close peek" })

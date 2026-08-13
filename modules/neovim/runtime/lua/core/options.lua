@@ -65,7 +65,8 @@ opt.undofile = true
 opt.list = true
 opt.listchars = { trail = "·", tab = "» " }
 
-opt.sessionoptions = "curdir,folds,globals,help,tabpages,terminal,winsize"
+-- No 'sessionoptions' here: resession.nvim does not read it (it keeps its own
+-- `options` allow-list) and nothing in this config calls :mksession.
 
 opt.updatetime = 250
 opt.timeoutlen = 300

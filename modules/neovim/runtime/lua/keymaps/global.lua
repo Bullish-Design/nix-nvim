@@ -26,17 +26,21 @@ wk.add({
   { "]t", "<cmd>tabnext<cr>",     desc = "Tab: next" },
   { "[t", "<cmd>tabprevious<cr>", desc = "Tab: prev" },
 
-  -- Treesitter navigation (g+hjkl)
-  { "gh", "<cmd>Treewalker Left<cr>",  desc = "Tree: parent" },
-  { "gj", "<cmd>Treewalker Down<cr>",  desc = "Tree: next sibling" },
-  { "gk", "<cmd>Treewalker Up<cr>",    desc = "Tree: prev sibling" },
-  { "gl", "<cmd>Treewalker Right<cr>", desc = "Tree: child" },
+  -- Treesitter navigation (Alt+hjkl).
+  -- NOT on g+hjkl: that took `gh`/`gH` from mini.diff (apply hunk, reset hunk,
+  -- hunk textobject) and `gj`/`gk` from the built-in display-line motions,
+  -- leaving apply-hunk with no binding at all. Alt+hjkl is unclaimed —
+  -- zeal.nvim's `<M-h>` only binds under `use_toggleterm = true`, which is off.
+  { "<M-h>", "<cmd>Treewalker Left<cr>",  desc = "Tree: parent" },
+  { "<M-j>", "<cmd>Treewalker Down<cr>",  desc = "Tree: next sibling" },
+  { "<M-k>", "<cmd>Treewalker Up<cr>",    desc = "Tree: prev sibling" },
+  { "<M-l>", "<cmd>Treewalker Right<cr>", desc = "Tree: child" },
 
-  -- Treesitter swap (Shift+g+hjkl)
-  { "gH", "<cmd>Treewalker SwapLeft<cr>",  desc = "Tree: swap parent" },
-  { "gJ", "<cmd>Treewalker SwapDown<cr>",  desc = "Tree: swap next" },
-  { "gK", "<cmd>Treewalker SwapUp<cr>",    desc = "Tree: swap prev" },
-  { "gL", "<cmd>Treewalker SwapRight<cr>", desc = "Tree: swap child" },
+  -- Treesitter swap (Alt+Shift+hjkl)
+  { "<M-S-h>", "<cmd>Treewalker SwapLeft<cr>",  desc = "Tree: swap parent" },
+  { "<M-S-j>", "<cmd>Treewalker SwapDown<cr>",  desc = "Tree: swap next" },
+  { "<M-S-k>", "<cmd>Treewalker SwapUp<cr>",    desc = "Tree: swap prev" },
+  { "<M-S-l>", "<cmd>Treewalker SwapRight<cr>", desc = "Tree: swap child" },
 
   -- Search / scroll
   { "<Esc>", "<cmd>nohlsearch<cr>", desc = "Clear search highlight" },

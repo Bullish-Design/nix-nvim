@@ -1,35 +1,13 @@
-local notes = require("productivity.notes")
-
+-- Code annotations.
+--
+-- data_dir is left at haunt's default (stdpath("data") .. "/haunt/"). It was
+-- previously pinned into the notes vault via productivity.notes, which resolved
+-- to ~/Documents/Notes — a directory that did not exist, while the real vault
+-- was $LOCI_OBSIDIAN_VAULT. Annotations are code metadata, not notes, so they
+-- belong in the data dir; haunt already scopes them per repository and, with
+-- per_branch_bookmarks, per branch. That also retires the DirChanged hook that
+-- existed only to re-point data_dir on every `:cd`.
 require("haunt").setup({
-  -- Store annotations alongside obsidian project notes
-  data_dir = notes.project_notes_dir() .. "/.haunt/",
   per_branch_bookmarks = true,
   picker = "snacks",
-})
-
-local function loci_workspace_active()
-  return type(vim.t.loci_workspace_id) == "string" and vim.t.loci_workspace_id ~= ""
-end
-
--- Update haunt data_dir when project root changes
-vim.api.nvim_create_autocmd("DirChanged", {
-  group = vim.api.nvim_create_augroup("HauntProjectDir", { clear = true }),
-  callback = function()
-    if loci_workspace_active() then
-      return
-    end
-
-    local ok, haunt_api = pcall(require, "haunt.api")
-    if not ok or type(haunt_api.change_data_dir) ~= "function" then
-      return
-    end
-
-    local dir = notes.project_notes_dir() .. "/.haunt/"
-    local changed_ok, err = pcall(haunt_api.change_data_dir, dir)
-    if not changed_ok then
-      vim.schedule(function()
-        vim.notify("Haunt project data-dir update failed: " .. tostring(err), vim.log.levels.WARN)
-      end)
-    end
-  end,
 })

@@ -80,12 +80,10 @@ in
       '';
     };
 
-    obsidian.vaultPath = mkOption {
-      type = types.str;
-      default = "${config.home.homeDirectory}/Notes";
-      defaultText = lib.literalExpression "\${config.home.homeDirectory}/Notes";
-      description = "Absolute path to the Obsidian vault used by the bundled Obsidian integration.";
-    };
+    # `obsidian.vaultPath` is gone. It exported LOCI_OBSIDIAN_VAULT, which only
+    # obsidian.nvim ever read — neither loci.nvim nor loci-core reference it.
+    # The runtime now has one notes system (loci), which locates its own vault,
+    # so the option had no consumer left. nix-terminal never set it.
 
     extraLuaConfig = mkOption {
       type = types.lines;

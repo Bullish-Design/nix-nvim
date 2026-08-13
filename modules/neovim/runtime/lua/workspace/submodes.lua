@@ -103,47 +103,8 @@ function M.tab_move()
   })
 end
 
-function M.window_nav()
-  run_submode({
-    timeout_ms = 1500,
-    message = {
-      { "Window nav: ", "ModeMsg" },
-      { "h/j/k/l", "MoreMsg" },
-      { " focus  ", "Normal" },
-      { "q", "WarningMsg" },
-      { " exit", "Normal" },
-    },
-    keys = {
-      h = function() vim.cmd.wincmd("h") end,
-      j = function() vim.cmd.wincmd("j") end,
-      k = function() vim.cmd.wincmd("k") end,
-      l = function() vim.cmd.wincmd("l") end,
-    },
-  })
-end
-
-function M.window_resize()
-  run_submode({
-    timeout_ms = 1500,
-    message = {
-      { "Window resize: ", "ModeMsg" },
-      { "h/l", "MoreMsg" },
-      { " width  ", "Normal" },
-      { "j/k", "MoreMsg" },
-      { " height  ", "Normal" },
-      { "=", "MoreMsg" },
-      { " equalize  ", "Normal" },
-      { "q", "WarningMsg" },
-      { " exit", "Normal" },
-    },
-    keys = {
-      h = function() vim.cmd("vertical resize -5") end,
-      l = function() vim.cmd("vertical resize +5") end,
-      j = function() vim.cmd("resize -3") end,
-      k = function() vim.cmd("resize +3") end,
-      ["="] = function() vim.cmd.wincmd("=") end,
-    },
-  })
-end
+-- No window_nav / window_resize submodes here. They were never mapped, and they
+-- duplicated <C-hjkl> (focus) and <C-S-hjkl> (resize) in keymaps/global.lua.
+-- Tabs get submodes because tabs have no cheap global motion; windows do.
 
 return M

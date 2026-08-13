@@ -36,12 +36,23 @@ require("bento").setup({
 
 local api = require("bento.api")
 
--- Menu controls
-api.register_expand_key("<leader>wbb")
+-- Menu controls.
+--
+-- register_expand_key is NOT called here: it creates a real global keymap that
+-- keymaps/leader.lua then overwrites (which-key drains its queue on VimEnter,
+-- so it always lands last). <leader>wbb is defined there, once.
+--
+-- register_collapse_key / register_next_page_key / register_prev_page_key set
+-- IN-MENU keys only — they create no global mapping, so <Esc> and <C-n>/<C-p>
+-- keep their global meanings outside the menu.
 api.register_collapse_key("<Esc>")
-api.register_last_buffer_key("<leader>wbl")
 api.register_next_page_key("<C-n>")
 api.register_prev_page_key("<C-p>")
+
+-- register_last_buffer_key sets an in-menu selection LABEL, not a keymap. It
+-- must be a single key like ";" — the previous "<leader>wbl" rendered that
+-- literal 11-character string as a label and could never be typed.
+api.register_last_buffer_key(";")
 
 -- Actions
 api.register_action("open", { key = "<CR>", action = api.actions.open })

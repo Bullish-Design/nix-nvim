@@ -23,22 +23,16 @@ wk.add({
   { "<leader>fz",      function() require("zeal").search() end,     desc = "Zeal docs" },
   { "<leader>ft",      "<cmd>TodoQuickFix keywords=TODO,FIX,FIXME,NOTE,PERF,HACK,WARN,TEST<cr>", desc = "Todos" },
 
-  -- ── FFF (fast fuzzy find) ──────────────────────────────────────────
-  -- { "<leader>F",       group = "FFF" },
-  -- { "<leader>Ff",      function() require("fff").find_files() end,     desc = "Files" },
-  -- { "<leader>Fg",      function() require("fff").live_grep() end,      desc = "Grep" },
-  -- { "<leader>Fz",      function() require("fff").live_grep({ grep = { modes = { "fuzzy", "plain" } } }) end, desc = "Fuzzy grep" },
-  -- { "<leader>Fc",      function() require("fff").live_grep({ query = vim.fn.expand("<cword>") }) end, desc = "Current word" },
-
   -- ── Git ──────────────────────────────────────────────────────────────
+  -- Hunk MOTION and hunk EDIT live on the bracket/`g` grammar that mini.diff
+  -- owns: `[h`/`]h` prev/next, `[H`/`]H` first/last, `gh` apply, `gH` reset,
+  -- `gh` hunk textobject. Do not mirror them onto <leader>g* — that is what
+  -- made three keys point at one action while apply-hunk had none.
   { "<leader>g",  group = "Git" },
   { "<leader>gg", function() require("neogit").open() end,  desc = "Neogit" },
   { "<leader>gD", "<cmd>DiffviewOpen<cr>",                  desc = "Diffview" },
   { "<leader>gq", "<cmd>DiffviewClose<cr>",                 desc = "Close diffview" },
   { "<leader>gb", function() MiniGit.show_at_cursor() end,  desc = "Blame/show" },
-  { "<leader>gn", function() MiniDiff.goto_hunk("next") end, desc = "Next hunk" },
-  { "<leader>gp", function() MiniDiff.goto_hunk("prev") end, desc = "Prev hunk" },
-  { "<leader>gr", function() MiniDiff.do_hunks(0, "reset") end, desc = "Reset hunks" },
 
   -- ── Workspace ────────────────────────────────────────────────────────
   { "<leader>w",  group = "Workspace" },
@@ -65,7 +59,6 @@ wk.add({
   -- Buffer subgroup
   { "<leader>wb",  group = "Buffer" },
   { "<leader>wbb", function() require("bento.api").toggle_menu() end,                 desc = "Bento menu" },
-  { "<leader>wbl", function() require("bento.api").open_menu() end,                   desc = "Open menu (expanded)" },
   { "<leader>wbL", function() require("bento.api").toggle_lock() end,                 desc = "Lock buffer" },
   { "<leader>wbD", function() require("bento.api").close_all_buffers({ visible = false, locked = false }) end, desc = "Close hidden" },
   { "<leader>wbd", function() Snacks.bufdelete() end,                                 desc = "Delete" },
@@ -106,34 +99,16 @@ wk.add({
   { "<leader>sr", function() require("grug-far").open() end, desc = "Grug-far" },
 
   -- ── Diagnostics ──────────────────────────────────────────────────────
+  -- <leader>x holds LISTS and actions only. Diagnostic MOTION is `[d`/`]d`
+  -- (mini.bracketed), which also gives you `[D`/`]D` for first/last.
   { "<leader>x",  group = "Diagnostics" },
   { "<leader>xd", vim.diagnostic.setloclist, desc = "Buffer list" },
   { "<leader>xq", vim.diagnostic.setqflist,  desc = "Workspace quickfix" },
-  { "<leader>xn", function() vim.diagnostic.jump({ count = 1 }) end,  desc = "Next" },
-  { "<leader>xp", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous" },
   { "<leader>xw", function() require("wtf").ai() end,  desc = "WTF: explain diagnostic" },
   { "<leader>xs", function() require("wtf").search() end, desc = "WTF: search diagnostic" },
 
-  -- ── Notes ───────────────────────────────────────────────────────────
-  { "<leader>n",  group = "Notes" },
-
-  -- Project notes (obsidian-backed, floating window)
-  { "<leader>nn", function() require("productivity.notes").new_project_note() end,   desc = "New project note" },
-  { "<leader>ni", function() require("productivity.notes").project_index() end,      desc = "Project index" },
-  { "<leader>nf", function() require("productivity.notes").find_project_notes() end, desc = "Find project notes" },
-  { "<leader>ng", function() require("productivity.notes").search_project_notes() end, desc = "Grep project notes" },
-  { "<leader>np", function() require("productivity.notes").browse_projects() end,    desc = "Browse all projects" },
-
-  -- Vault-wide (obsidian)
-  { "<leader>no", "<cmd>Obsidian quick-switch<cr>",  desc = "Quick switch (vault)" },
-  { "<leader>ns", "<cmd>Obsidian search<cr>",        desc = "Search vault" },
-  { "<leader>nd", "<cmd>Obsidian today<cr>",         desc = "Daily note" },
-
-  -- Tasks
-  { "<leader>nt", "<cmd>TaskNotesBrowse<cr>",        desc = "Browse tasks" },
-  { "<leader>nT", "<cmd>TaskNotesNew<cr>",           desc = "New task" },
-
-  -- Annotations (haunt.nvim — stored in project notes dir)
+  -- ── Notes (annotations only — loci owns notes, see <leader>l) ────────
+  { "<leader>n",  group = "Annotations" },
   { "<leader>na", function() require("haunt.api").annotate() end,    desc = "Add/edit annotation" },
   { "<leader>nl", function() require("haunt.picker").show() end,     desc = "List annotations" },
   { "<leader>n]", function() require("haunt.api").next() end,        desc = "Next annotation" },
@@ -159,9 +134,14 @@ wk.add({
   { "<leader>lw", "<cmd>LociWorkspaces<cr>", desc = "Switch workspace" },
   { "<leader>lP", "<cmd>LociProjects<cr>",   desc = "Projects" },
   { "<leader>ld", "<cmd>LociDoctor<cr>",     desc = "Doctor (findings)" },
+  -- The single notes surface. These replace the deleted obsidian.nvim vault
+  -- bindings one-for-one: LociSearch for <leader>ns, LociBacklinks for the
+  -- old <localleader>b, LociDaily for <leader>nd.
   { "<leader>ln",  group = "Notes" },
   { "<leader>lnd", "<cmd>LociDaily<cr>",     desc = "Daily note" },
   { "<leader>lns", "<cmd>LociScratch<cr>",   desc = "Scratch note" },
   { "<leader>lnn", "<cmd>LociNote<cr>",      desc = "New note" },
+  { "<leader>lnf", "<cmd>LociSearch<cr>",    desc = "Search notes" },
+  { "<leader>lnb", "<cmd>LociBacklinks<cr>", desc = "Backlinks" },
 
 })

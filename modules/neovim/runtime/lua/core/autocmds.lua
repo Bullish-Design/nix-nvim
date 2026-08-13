@@ -23,14 +23,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("IndentscopeDisable", { clear = true }),
-  pattern = { "help", "neogit*", "DiffviewFiles", "snacks_*", "sidequest" },
-  callback = function()
-    vim.b.miniindentscope_disable = true
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
   group = augroup("Ui2Styling", { clear = true }),
   pattern = { "cmd", "msg", "pager", "dialog" },
   callback = function()

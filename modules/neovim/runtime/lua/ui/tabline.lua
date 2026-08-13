@@ -1,4 +1,4 @@
-vim.o.showtabline = 2
+-- 'showtabline' is set once, in core/options.lua.
 
 local theme = {
   fill = "KanagawaTabLineFill",

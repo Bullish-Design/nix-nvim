@@ -32,18 +32,46 @@ implements behind `mkIf cfg.enable`.
 The `config` body builds a `writeShellScriptBin` wrapper that launches the
 pinned neovim with the shipped lua tree (`./runtime`, de-hardcoded — NOT
 `~/.dotfiles/nvim`) on the runtimepath, the loci.nvim plugin appended to rtp,
-treesitter grammars + `after/` on rtp, and the 9 ambient LSP servers + `loci-lsp`
-on PATH.
+treesitter grammars + `after/` on rtp, and the 9 ambient LSP servers +
+`editorTools` (w3m, for zeal.nvim) + `loci-lsp` on PATH.
+
+`lspServers` in config.nix MUST stay in step with `server_cmds` in
+`runtime/lua/intelligence/lsp.lua`. The lua side gates `vim.lsp.enable` on
+`executable()`, so a server shipped in nix but absent there is closure weight
+that never runs.
 
 ## What lives here vs. loci.nvim
 
 - **Here:** neovim 0.12 packaging, the non-loci lua tree (incl. the loci leader
   maps in `runtime/lua/keymaps/leader.lua` and the `require("loci")` call in
-  `runtime/init.lua`), the vim.pack set, 9 LSP servers, treesitter grammars, and
-  **tasknotes** (the `tasknotes.nvim` plugin rides vim.pack; setup is in the
-  productivity lua tree).
+  `runtime/init.lua`), the vim.pack set, 9 LSP servers, and treesitter grammars.
 - **Not here:** `lua/loci/` (the thin client) and `loci-lsp` — both come from the
   `loci-nvim` flake input (plugin → rtp, server → PATH).
+- **Notes are loci's, end to end.** loci owns daily, scratch, note, search,
+  backlinks, neighbors, and traversal. Do NOT add a second notes stack. The
+  obsidian.nvim + tasknotes.nvim + bases.nvim + custom-notes layer that used to
+  live here wrote to `~/Documents/Notes` while obsidian.nvim read
+  `$LOCI_OBSIDIAN_VAULT` (`~/Notes`); the two never converged, and the vault
+  path guards silently never matched.
+
+## One way to do things
+
+The house rules that keep the keymap surface single-valued:
+
+- **Motion lives on the `[`/`]` and `g` grammars; `<leader>` holds lists and
+  actions.** Do not mirror a motion onto `<leader>` — that is how
+  `<leader>gn`/`gp`, `<leader>xn`/`xp` and `<leader>gr` came to shadow the
+  mini.diff / mini.bracketed originals.
+- **`gh`/`gH` belong to mini.diff** (apply hunk, reset hunk, hunk textobject).
+  Treewalker is on `<M-hjkl>` / `<M-S-hjkl>`.
+- **`<localleader>p` is Peek definition** from the LSP layer. `LspAttach` and
+  `FileType` do not fire in a fixed order, so a ftplugin that also wants `p`
+  produces a nondeterministic winner. Pick another letter.
+- **Neovim's built-in `gr*` LSP defaults are deleted** in `keymaps/lsp.lua`.
+  The `gd`/`gr`/`gI`/`gy` + `<localleader>` set is the single interface.
+- **which-key `add()` only queues.** The queue drains on `VimEnter` via
+  `vim.schedule`, so `keymaps/*.lua` always lands after every plugin `setup()`.
+  Require order in `init.lua` does not decide these contests.
 
 ## Status
 

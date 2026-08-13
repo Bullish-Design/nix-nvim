@@ -88,14 +88,9 @@ local servers = {
     },
   },
   nil_ls = { capabilities = capabilities },
-  -- basedpyright = {
-  --   capabilities = capabilities,
-  --   settings = {
-  --     basedpyright = {
-  --       analysis = { autoSearchPaths = true, diagnosticMode = "openFilesOnly" },
-  --     },
-  --   },
-  -- },
+  -- Python type checking is `ty` ONLY. basedpyright is deliberately absent
+  -- (and dropped from the nix closure) so two checkers cannot both report on
+  -- the same buffer. `ruff` below is the linter/formatter, not a checker.
   ty = {
     capabilities = capabilities,
     settings = {
@@ -132,7 +127,6 @@ end
 local server_cmds = {
   lua_ls = "lua-language-server",
   nil_ls = "nil",
-  -- basedpyright = "basedpyright-langserver",
   ty = "ty",
   ruff = "ruff",
   rust_analyzer = "rust-analyzer",
@@ -173,13 +167,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.api.nvim_create_autocmd("BufWritePre", {
         buffer = args.buf,
         callback = function()
-          vim.lsp.buf.format({
-            bufnr = args.buf,
-            timeout_ms = 500,
-            filter = function(c)
-              return true
-            end,
-          })
+          -- No `filter`: the previous `function(c) return true end` was a
+          -- no-op that read like a policy. If two formatting-capable clients
+          -- ever attach to one buffer, name the winner here instead.
+          vim.lsp.buf.format({ bufnr = args.buf, timeout_ms = 500 })
         end,
       })
     end

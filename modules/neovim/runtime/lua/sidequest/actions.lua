@@ -50,17 +50,11 @@ M.register("session.save_tab", function() require("resession").save_tab(); requi
 M.register("test.run", function(ctx) Snacks.picker.grep({ cwd = ctx and ctx.root or nil, search = "test" }) end)
 M.register("test.find", function(ctx) Snacks.picker.files({ cwd = ctx and ctx.root or nil, search = "test" }) end)
 M.register("test.last", function() vim.notify("No stored test output yet", vim.log.levels.INFO) end)
-M.register("notes.new", function(ctx)
-  local root = (ctx and ctx.root) or vim.fn.getcwd()
-  local notes_dir = root .. "/.sidequest/notes"
-  vim.fn.mkdir(notes_dir, "p")
-  vim.cmd("edit " .. notes_dir .. "/" .. os.date("%Y-%m-%d") .. "-note.md")
-end)
-M.register("notes.find", function(ctx)
-  local notes_dir = (ctx and ctx.root or vim.fn.getcwd()) .. "/.sidequest/notes"
-  vim.fn.mkdir(notes_dir, "p")
-  Snacks.picker.files({ cwd = notes_dir })
-end)
+-- Notes route to loci, the one notes system. These used to write a third tree
+-- at <root>/.sidequest/notes, invisible to both the vault and loci.
+M.register("notes.new", function() vim.cmd("LociNote") end)
+M.register("notes.find", function() vim.cmd("LociSearch") end)
+M.register("notes.daily", function() vim.cmd("LociDaily") end)
 M.register("notes.todos", function(ctx) Snacks.picker.grep({ cwd = ctx and ctx.root or nil, search = "TODO" }) end)
 M.register("issue.files.attach_current", function()
   local issue = require("sidequest.issue")

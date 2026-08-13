@@ -84,8 +84,9 @@ return {
         title = "Notes",
         sections = {
           { type = "actions", items = {
-            { key = "n", icon = "󰎞 ", label = "New note", action = "notes.new" },
+            { key = "n", icon = "󰎞 ", label = "New note", action = "notes.new", close = true },
             { key = "f", icon = "󰱼 ", label = "Find note", action = "notes.find", close = true },
+            { key = "d", icon = " ", label = "Daily note", action = "notes.daily", close = true },
             { key = "t", icon = " ", label = "Todos", action = "notes.todos", close = true },
           } },
         },

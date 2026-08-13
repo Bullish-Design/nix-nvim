@@ -4,7 +4,9 @@
 { inputs }:
 { config, lib, pkgs, ... }:
 let
-  inherit (lib) mkIf optional optionalString concatStringsSep makeBinPath escapeShellArg;
+  # `escapeShellArg` is gone with the LOCI_OBSIDIAN_VAULT export — nothing else
+  # in this file needs shell quoting.
+  inherit (lib) mkIf optional optionalString concatStringsSep makeBinPath;
   cfg = config.nix-nvim.neovim;
 
   # The loci editor stack from the loci.nvim flake (nix-nvim-PLAN §3.3/§6):
@@ -37,12 +39,17 @@ let
 
   # The ambient editor LSP servers (nix-nvim-PLAN §1/§7) — always-on, attach in
   # any buffer. Project toolchains are devenv-lib's, not here. All ride nixpkgs.
+  #
+  # This list must stay in step with `server_cmds` in
+  # runtime/lua/intelligence/lsp.lua: the lua side gates `vim.lsp.enable` on
+  # `executable()`, so a server shipped here but not configured there is closure
+  # weight that never runs. basedpyright was exactly that — shipped, never
+  # enabled, and a second Python checker next to `ty` if it ever had been.
   lspServers = with pkgs; [
-    basedpyright
-    ty
-    ruff
+    ty # python types
+    ruff # python lint/format
     vtsls
-    vscode-langservers-extracted # html, json, css, eslint
+    vscode-langservers-extracted # html, json (css + eslint ride along unused)
     lua-language-server
     nil # nix
     rust-analyzer
@@ -50,9 +57,14 @@ let
     markdown-oxide
   ];
 
+  # Non-LSP tools the runtime shells out to. zeal.nvim drives a terminal browser
+  # (`browser = { "w3m", ... }`); without w3m on PATH, <leader>fz and the whole
+  # w3m keymap layer in runtime/lua/development/zeal.lua cannot work.
+  editorTools = with pkgs; [ w3m ];
+
   # Everything the launcher needs on PATH (so vim.fn.executable("loci-lsp") and
   # the ambient servers resolve regardless of the surrounding shell env).
-  pathPkgs = lspServers ++ cfg.extraPackages
+  pathPkgs = lspServers ++ editorTools ++ cfg.extraPackages
     ++ optional cfg.loci.enable lociEngine;
 
   extraLuaFile = pkgs.writeText "nix-nvim-extra.lua" cfg.extraLuaConfig;
@@ -73,13 +85,12 @@ let
     # sqlite carried from the source wrapper (defensive; audit candidate — §10 Q4).
     export LD_LIBRARY_PATH="${pkgs.sqlite.out}/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
     export PATH="${makeBinPath pathPkgs}''${PATH:+:$PATH}"
-    export LOCI_OBSIDIAN_VAULT=${escapeShellArg cfg.obsidian.vaultPath}
     exec ${cfg.package}/bin/nvim -u "${srcDir}/init.lua" ${cmdFlags} ${postFlags} "$@"
   '';
 in
 {
   config = mkIf cfg.enable {
-    home.packages = [ wrapper ] ++ lspServers ++ cfg.extraPackages
+    home.packages = [ wrapper ] ++ lspServers ++ editorTools ++ cfg.extraPackages
       ++ optional cfg.loci.enable lociEngine;
   };
 }
