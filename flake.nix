@@ -41,8 +41,13 @@
     # the note stayed invisible to search and the graph. Minor, not patch: that is
     # the first thing a user does with the editor. loci.nvim t34 measures the fix
     # against the real server and fails against the previous engine build.
+    #
+    # v0.3.1 carries loci-core @4be3250 (v0.4.3), which adds upward vault
+    # discovery: `find_vault_root` walks up from the working directory, so `loci`
+    # works in any subdirectory of a vault instead of only at its root. v0.4.3
+    # also recreates incompatible cache index schemas.
     loci-nvim = {
-      url = "github:Bullish-Design/loci.nvim?ref=v0.3.0";
+      url = "github:Bullish-Design/loci.nvim?ref=v0.3.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
