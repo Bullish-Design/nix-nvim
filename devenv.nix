@@ -8,8 +8,6 @@
 
 {
   repoman.enable = true;
-  repoman.cliProvider = "venv";
-  repoman.managers = [ "copy" "git" ];
   # Project 039: `vendor.toolchain.enable = false` moved to vendomat.toml.
 
   # Python venv for uv-managed deps. The manager CLIs (copyroom, gitman) come from
