@@ -2,7 +2,7 @@
 #
 # RepoMan is always on. This base template wires the two language-agnostic core
 # managers: copy (copyroom — templating / convergence) and git (gitman — version
-# control). Language add-ons (e.g. template-py) extend repoman.managers with
+# control). Language add-ons (e.g. template-py) extend the project manifest with
 # their own managers (test, …).
 { ... }:
 
@@ -11,7 +11,7 @@
   # Project 039: `vendor.toolchain.enable = false` moved to vendomat.toml.
 
   # Python venv for uv-managed deps. The manager CLIs (copyroom, gitman) come from
-  # the SYSTEM-WIDE toolchain venv (`repoman-sync --machine`), not this repo's venv.
+  # Vendomat's shared store closure via REPOMAN_TOOLCHAIN_BIN, not this repo's venv.
   languages.python = {
     enable = true;
     venv.enable = true;
