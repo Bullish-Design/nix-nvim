@@ -12,15 +12,6 @@ inputs:
     url: "git+https://github.com/Bullish-Design/repoman?dir=modules&ref=main&rev=57473ad47365da67d7c4ad666cfc37facf94d21c"
     flake: false
 
-  # shellij: durable Zellij workbenches, installed by default (not a roster
-  # manager) — RepoMan presence-imports shellij's own devenv module when this
-  # input is declared: shellij/zellij/yazi packages, the guarded `shellij open`
-  # enterShell hook, and YAZI_CONFIG_HOME pointing at the packaged Yazi assets.
-  # Dev: a local path to shellij's checkout. Fleet: github:Bullish-Design/shellij
-  shellij:
-    url: "git+file:///home/andrew/Documents/Projects/shellij"
-    flake: false
-
 # vendomat's consumer module now reaches this repository through the central
 # overlay (devman.overlayDir), not this input — see ~/.config/devman/projects/
 # nix-nvim/devenv.local.nix.
