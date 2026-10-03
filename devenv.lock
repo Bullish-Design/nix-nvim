@@ -77,19 +77,7 @@
       "inputs": {
         "devenv": "devenv",
         "nixpkgs": "nixpkgs",
-        "repoman": "repoman",
-        "shellij": "shellij"
-      }
-    },
-    "shellij": {
-      "flake": false,
-      "locked": {
-        "type": "git",
-        "url": "file:///home/andrew/Documents/Projects/shellij"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:///home/andrew/Documents/Projects/shellij"
+        "repoman": "repoman"
       }
     }
   },
