@@ -19,8 +19,8 @@ hosts, or `mkHost`.
 - In-repo ops go through the devenv: `devenv shell -- <cmd>`.
 
 ## Inherited vs owned
-- **Inherited** (converged by `copyroom update`, do NOT hand-edit): `devenv.{nix,yaml}`,
-  `repoman.lock`, `copyroom.project.yml`, `.copier-answers.yml`, `.gitignore`, and the module *frame*.
+- **Inherited** (converged by CopyRoom): `devenv.{nix,yaml}`, `repoman.lock`,
+  `.gitignore`, and the module *frame*.
 - **Owned** (template seeds, you fill): flake `description`/`inputs`/outputs-attrs,
   module `config` bodies + extra options, `modules/default.nix` import list, docs, optional `scripts/`.
 
