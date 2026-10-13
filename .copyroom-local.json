@@ -52,6 +52,40 @@
       "source_digest": "ac4b29cc34b6957fe48670aac2e5dadd8ccb97c699761048dcac2bd19a62a64a",
       "templateer_digest": "286c87491394aab4eca7f82e66bf4560ceee464eea82ed763dd246b51bb8c881",
       "templateer_version": "0.6.0"
+    },
+    "module": {
+      "answers": {
+        "author_email": "BullishDesignEngineering@gmail.com",
+        "author_name": "Bullish Design",
+        "description": "Home Manager module flake packaging the loci-rich Neovim config (nvim + keymaps + LSP client); consumed by nix-terminal, supersedes nixvim.",
+        "devman_ref": "v0.5.1",
+        "module_class": "nixos",
+        "module_file": "example.nix",
+        "module_name": "example",
+        "project_id": "nix-nvim",
+        "project_name": "nix-nvim",
+        "repoman_dev_root": "/home/andrew/Documents/Projects"
+      },
+      "composer_digest": "bff36234f8e9eb7ca17996861b6cf7c73d7405bc5c742885561bbede1f274cd7",
+      "kind": "template",
+      "manifest_digest": "c51badbd80e4d6807a2341a9156ceb6415db735547c646a2e6006565791006c0",
+      "owners": {
+        "flake.nix": "flake_nix",
+        "modules/default.nix": "modules_default_nix",
+        "modules/example.nix": "modules_module_file"
+      },
+      "pin": {
+        "commit": "8d623640dc3e9ca4110f5387e48744bf13f0ce0e",
+        "ref": "v0.4.1",
+        "repo": "/home/andrew/Documents/Projects/template-nix",
+        "subdir": "source/module"
+      },
+      "render_digest": "e85796b40c26d3b1ba8f5ae6f28d9650324064a87a439c2e54b149b7486c1a82",
+      "revision": 0,
+      "source": "/home/andrew/Documents/Projects/template-nix/source/module",
+      "source_digest": "29ff64529e7230c178235545b4f05b772b2b2f060c3d26f58b6e78d41ca982cb",
+      "templateer_digest": "286c87491394aab4eca7f82e66bf4560ceee464eea82ed763dd246b51bb8c881",
+      "templateer_version": "0.6.0"
     }
   },
   "manifest_digest": "3967d99404271e5268d4d5750e14416594515c7df9d4b2942559e38f151e80ba",
