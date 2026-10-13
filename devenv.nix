@@ -7,14 +7,6 @@
 {
   repoman.enable = true;
 
-  # Devman bootstraps its central declaration on the first shell entry and
-  # reconciles the machine-local links and agent pool on the next entry.
-  devman = {
-    enable = true;
-    project = "nix-nvim";
-    groups = [ "base" ];
-  };
-
   # The host profile puts the managers (copyroom, gitman) on PATH. RepoMan runs
   # them by name. This repo keeps no repoman.lock and installs no manager.
   languages.python = {
