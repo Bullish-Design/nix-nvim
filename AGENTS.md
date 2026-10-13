@@ -7,8 +7,9 @@ configuration promoted from `~/.dotfiles/nvim`. It is consumed by **nix-terminal
 (replacing its old `nixvim` input) and **supersedes** `Bullish-Design/nixvim`.
 
 This repo is also a [repoman](https://github.com/Bullish-Design/repoman)-managed
-devenv project (see `devenv.nix`, `repoman.lock`) — the toolchain/version-control
-layer is orthogonal to the Nix module layer below.
+devenv project. The template files (`devenv.nix`, `devenv.yaml`, `.gitignore`,
+`.repoman/project.toml`, and the module frame) are converged by CopyRoom. The
+toolchain/version-control layer is orthogonal to the Nix module layer below.
 
 ## Architecture
 
