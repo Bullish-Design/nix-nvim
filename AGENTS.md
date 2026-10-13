@@ -6,10 +6,10 @@
 configuration promoted from `~/.dotfiles/nvim`. It is consumed by **nix-terminal**
 (replacing its old `nixvim` input) and **supersedes** `Bullish-Design/nixvim`.
 
-This repo is also a [repoman](https://github.com/Bullish-Design/repoman)-managed
-devenv project. The template files (`devenv.nix`, `devenv.yaml`, `.gitignore`,
-`.repoman/project.toml`, and the module frame) are converged by CopyRoom. The
-toolchain/version-control layer is orthogonal to the Nix module layer below.
+This repo is also a devenv project. CopyRoom converges the template files
+(`devenv.nix`, `devenv.yaml`, `.gitignore`, and the module frame). The
+toolchain and version-control layer is orthogonal to the Nix module layer below.
+Run `copyroom status` to check the template state.
 
 ## Architecture
 
@@ -84,7 +84,7 @@ audit clean (`nixpkgs-neovim` is the only sanctioned extra node).
 
 - **Consumed by** `nix-terminal` (`homeManagerModules.neovim` / `.default`).
 - **Consumes** `loci-nvim.packages.<sys>.{loci-nvim, loci-lsp}` (`path:` input in
-  dev; `repoman fleet flake-update` swaps to a tagged `github:` at publish).
+  dev; the fleet publish step swaps it to a tagged `github:` input).
 - **Supersedes** `Bullish-Design/nixvim` (retire after cutover).
 
 ## Project

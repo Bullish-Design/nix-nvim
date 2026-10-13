@@ -1,14 +1,15 @@
-# nix-nvim — repoman-enabled devenv.
+# nix-nvim — devenv for the Home Manager module flake and its flake gate.
 #
-# RepoMan is always on. The tracked .repoman/project.toml selects its manager
-# roster. This base project uses copyroom and gitman.
-{ ... }:
+# The host profile puts copyroom and gitman on PATH.
+{ pkgs, ... }:
 
 {
-  repoman.enable = true;
+  # copyroom runs `git` and `patch` (gnupatch) as child processes.
+  packages = [
+    pkgs.git
+    pkgs.gnupatch
+  ];
 
-  # The host profile puts the managers (copyroom, gitman) on PATH. RepoMan runs
-  # them by name. This repo keeps no repoman.lock and installs no manager.
   languages.python = {
     enable = true;
     venv.enable = true;

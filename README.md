@@ -2,17 +2,14 @@
 
 Home Manager module flake packaging the loci-rich Neovim config (nvim + keymaps + LSP client); consumed by nix-terminal, supersedes nixvim.
 
-A [repoman](https://github.com/Bullish-Design/repoman)-managed [devenv](https://devenv.sh)
-project. RepoMan is always enabled. `.repoman/project.toml` selects the **copy**
-(copyroom — templating / convergence) and **git** (gitman — version control) managers.
+A [devenv](https://devenv.sh) project. Copyroom handles templating and
+convergence. Gitman and jj handle version control.
 
 ## Getting started
 
 ```bash
 devenv shell          # enter the pinned environment
-repoman-sync          # check that repoman is on PATH + generate the router skill
-repoman managers      # list the wired managers
-repoman doctor        # health-check the wiring + each manager
+copyroom status       # check the template state
 ```
 
 ## Staying current with the template
