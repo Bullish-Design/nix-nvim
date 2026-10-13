@@ -2,7 +2,7 @@
 # namespaced options + a single `config = lib.mkIf cfg.enable { … }`.
 # NEVER write an unconditional top-level `config` / bare attrs block.
 #
-# The frame below is owned by the `module` layer; the
+# The frame below is template-owned (converges via `copyroom update`); the
 # `config` body + any extra `options` are THIS repo's to fill.
 { config, lib, pkgs, ... }:
 let
