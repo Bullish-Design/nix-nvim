@@ -17,14 +17,21 @@ hosts, or `mkHost`.
   (+ a `default` aggregate). No composition outputs.
 - Personal-use-only: hardcode `andrew`; no portability / multi-user ceremony.
 - In-repo ops go through the devenv: `devenv shell -- <cmd>`.
-- The host profile puts the managers (`copyroom`, `gitman`) on `PATH`, and RepoMan
-  runs them by name. There is no per-repo `repoman.lock`.
+- `nix-meta` supplies the tool versions and RepoMan's devenv module through the
+  central overlay. This repository owns its project ID and groups in
+  `.devman/project.toml` and its manager roster in `.repoman/project.toml`.
+- The generated Devman manifest starts with `groups = []`. Add the `base` group
+  only after this repository defines both `base:check` and `base:test` task bodies
+  in `devenv.nix`. A module flake's `nix flake check` does not define those tasks.
 
 ## Inherited vs owned
 - **Inherited** (converged by CopyRoom): `devenv.{nix,yaml}`,
   `.gitignore`, and the module *frame*.
-- **Owned** (template seeds, you fill): flake `description`/`inputs`/outputs-attrs,
-  module `config` bodies + extra options, `modules/default.nix` import list, docs, optional `scripts/`.
+- **Owned** (template seeds, you fill): `.devman/project.toml`,
+  `.repoman/project.toml`, project tasks in `devenv.nix`,
+  flake `description`/`inputs`/outputs-attrs, module `config` bodies + extra options,
+  `modules/default.nix` import list,
+  docs, optional `scripts/`.
 
 ## Validate
 `nix flake check` (+ `nix flake show` to confirm the exported module set).
