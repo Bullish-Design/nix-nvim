@@ -17,9 +17,11 @@ hosts, or `mkHost`.
   (+ a `default` aggregate). No composition outputs.
 - Personal-use-only: hardcode `andrew`; no portability / multi-user ceremony.
 - In-repo ops go through the devenv: `devenv shell -- <cmd>`.
+- The host profile puts the managers (`copyroom`, `gitman`) on `PATH`, and RepoMan
+  runs them by name. There is no per-repo `repoman.lock`.
 
 ## Inherited vs owned
-- **Inherited** (converged by CopyRoom): `devenv.{nix,yaml}`, `repoman.lock`,
+- **Inherited** (converged by CopyRoom): `devenv.{nix,yaml}`,
   `.gitignore`, and the module *frame*.
 - **Owned** (template seeds, you fill): flake `description`/`inputs`/outputs-attrs,
   module `config` bodies + extra options, `modules/default.nix` import list, docs, optional `scripts/`.
