@@ -75,13 +75,13 @@
         "modules/example.nix": "modules_module_file"
       },
       "pin": {
-        "commit": "8d623640dc3e9ca4110f5387e48744bf13f0ce0e",
-        "ref": "v0.4.1",
+        "commit": "18330502e35cdd8ab7e54f788ab7627011363ea6",
+        "ref": "v0.4.2",
         "repo": "/home/andrew/Documents/Projects/template-nix",
         "subdir": "source/module"
       },
       "render_digest": "e85796b40c26d3b1ba8f5ae6f28d9650324064a87a439c2e54b149b7486c1a82",
-      "revision": 0,
+      "revision": 1,
       "source": "/home/andrew/Documents/Projects/template-nix/source/module",
       "source_digest": "29ff64529e7230c178235545b4f05b772b2b2f060c3d26f58b6e78d41ca982cb",
       "templateer_digest": "286c87491394aab4eca7f82e66bf4560ceee464eea82ed763dd246b51bb8c881",
