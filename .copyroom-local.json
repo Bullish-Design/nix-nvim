@@ -23,7 +23,7 @@
         "project_name": "nix-nvim"
       },
       "composer_digest": "bff36234f8e9eb7ca17996861b6cf7c73d7405bc5c742885561bbede1f274cd7",
-      "manifest_digest": "c0e4599228852f02d395301d22cb46236ee4ba3972131c28e910d79bf022604f",
+      "manifest_digest": "39e9292eae5911300e58f2d669ad136305a43807c08b571a2eaaba046de9aaa5",
       "omissions": [
         ".devman/project.toml",
         ".repoman/project.toml",
@@ -38,15 +38,15 @@
         "CLAUDE.md": "symlink:AGENTS.md"
       },
       "pin": {
-        "commit": "01074ceacfd00c5584a6e59c743e1f5e68ced3df",
-        "ref": "main",
+        "commit": "435bc637e26c5118faa2f0322b7a963c03a5d788",
+        "ref": "v0.5.0",
         "repo": "/home/andrew/Documents/Projects/template-nix",
         "subdir": "source/base"
       },
-      "render_digest": "76a6681b61a8b556cebf08a7f567d892dda35b6002dc67b6c8b453d9065e58cc",
-      "revision": 3,
+      "render_digest": "2d5459349f242d2cb4d9331e3c13e5e55ff0e3d177062c917db62deb35198bc3",
+      "revision": 4,
       "source": "/home/andrew/Documents/Projects/template-nix/source/base",
-      "source_digest": "958844a639158dbba998d7ebc4c2ea5aed5e90b9918837a2dbbb8895443a1355",
+      "source_digest": "8fd00879024bee58fd01e1af02befc41464c11bb4acb94816cdc536a9d2232b2",
       "templateer_digest": "286c87491394aab4eca7f82e66bf4560ceee464eea82ed763dd246b51bb8c881",
       "templateer_version": "0.6.0"
     },
@@ -69,15 +69,21 @@
         "modules/default.nix": "modules_default_nix",
         "modules/example.nix": "modules_module_file"
       },
+      "pin": {
+        "commit": "435bc637e26c5118faa2f0322b7a963c03a5d788",
+        "ref": "v0.5.0",
+        "repo": "/home/andrew/Documents/Projects/template-nix",
+        "subdir": "source/module"
+      },
       "render_digest": "e85796b40c26d3b1ba8f5ae6f28d9650324064a87a439c2e54b149b7486c1a82",
-      "revision": 2,
+      "revision": 3,
       "source": "/home/andrew/Documents/Projects/template-nix/source/module",
       "source_digest": "187a73972bba090dd804bc8ddc07b0bf22f7318bb482a62d2d3bf87e8ece6e85",
       "templateer_digest": "286c87491394aab4eca7f82e66bf4560ceee464eea82ed763dd246b51bb8c881",
       "templateer_version": "0.6.0"
     }
   },
-  "manifest_digest": "c0e4599228852f02d395301d22cb46236ee4ba3972131c28e910d79bf022604f",
+  "manifest_digest": "39e9292eae5911300e58f2d669ad136305a43807c08b571a2eaaba046de9aaa5",
   "omissions": [
     ".devman/project.toml",
     ".repoman/project.toml",
@@ -92,17 +98,17 @@
     "CLAUDE.md": "symlink:AGENTS.md"
   },
   "pin": {
-    "commit": "01074ceacfd00c5584a6e59c743e1f5e68ced3df",
-    "ref": "main",
+    "commit": "435bc637e26c5118faa2f0322b7a963c03a5d788",
+    "ref": "v0.5.0",
     "repo": "/home/andrew/Documents/Projects/template-nix",
     "subdir": "source/base"
   },
   "project_id": "0cd10fded5374f4fbf548d37e067e3e7",
-  "render_digest": "76a6681b61a8b556cebf08a7f567d892dda35b6002dc67b6c8b453d9065e58cc",
-  "revision": 3,
+  "render_digest": "2d5459349f242d2cb4d9331e3c13e5e55ff0e3d177062c917db62deb35198bc3",
+  "revision": 4,
   "schema": 2,
   "source": "/home/andrew/Documents/Projects/template-nix/source/base",
-  "source_digest": "958844a639158dbba998d7ebc4c2ea5aed5e90b9918837a2dbbb8895443a1355",
+  "source_digest": "8fd00879024bee58fd01e1af02befc41464c11bb4acb94816cdc536a9d2232b2",
   "templateer_digest": "286c87491394aab4eca7f82e66bf4560ceee464eea82ed763dd246b51bb8c881",
   "templateer_version": "0.6.0"
 }
