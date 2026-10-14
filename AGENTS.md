@@ -15,11 +15,10 @@ hosts, or `mkHost`.
 - One file per concern under `modules/`; `modules/default.nix` aggregates them.
 - The flake exports exactly `nixosModules`
   (+ a `default` aggregate). No composition outputs.
-- Personal-use-only: hardcode `andrew`; no portability / multi-user ceremony.
 - In-repo ops go through the devenv: `devenv shell -- <cmd>`.
-- `nix-meta` supplies the tool versions and RepoMan's devenv module through the
-  central overlay. This repository owns its project ID and groups in
-  `.devman/project.toml` and its manager roster in `.repoman/project.toml`.
+- This repository owns its project ID and groups in `.devman/project.toml`
+  and its project settings in `devenv.nix`.
+- For Devman workflows, use the skills linked under `.agents/skills/`.
 - The generated Devman manifest starts with `groups = []`. Add the `base` group
   only after this repository defines both `base:check` and `base:test` task bodies
   in `devenv.nix`. A module flake's `nix flake check` does not define those tasks.
@@ -28,7 +27,7 @@ hosts, or `mkHost`.
 - **Inherited** (converged by CopyRoom): `devenv.{nix,yaml}`,
   `.gitignore`, and the module *frame*.
 - **Owned** (template seeds, you fill): `.devman/project.toml`,
-  `.repoman/project.toml`, project tasks in `devenv.nix`,
+  project tasks in `devenv.nix`,
   flake `description`/`inputs`/outputs-attrs, module `config` bodies + extra options,
   `modules/default.nix` import list,
   docs, optional `scripts/`.
