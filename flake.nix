@@ -46,8 +46,12 @@
     # discovery: `find_vault_root` walks up from the working directory, so `loci`
     # works in any subdirectory of a vault instead of only at its root. v0.4.3
     # also recreates incompatible cache index schemas.
+    #
+    # v0.3.2 carries loci-core @7458350 (v0.4.5). The v0.3.1 pin held loci-core
+    # @4be3250, whose flake said version 0.3.0 while pyproject.toml said 0.4.3,
+    # so the nixpkgs metadata check failed the build of python3.13-loci-core.
     loci-nvim = {
-      url = "github:Bullish-Design/loci.nvim?ref=v0.3.1";
+      url = "github:Bullish-Design/loci.nvim?ref=v0.3.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
